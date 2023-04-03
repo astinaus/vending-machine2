@@ -42,6 +42,16 @@ const productStock = new Map([
     ["Orange_Cola", 10],
 ]);
 
+// 소지금, 잔액 초기값 작성
+walletMoney.insertAdjacentHTML(
+    "beforeend",
+    `<span id="wallet-value">${numberWithCommas(wallet)} 원</span>`
+);
+pocketMoney.insertAdjacentHTML(
+    "beforeend",
+    `<span id="pocket-value">${numberWithCommas(slot)} 원</span>`
+);
+
 // 콜라 버튼 리스트 생성 함수
 function createProducts() {
     const list = document.getElementById("item-list");
@@ -85,15 +95,6 @@ totalPrice();
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
-walletMoney.insertAdjacentHTML(
-    "beforeend",
-    `<span id="wallet-value">${numberWithCommas(wallet)} 원</span>`
-);
-pocketMoney.insertAdjacentHTML(
-    "beforeend",
-    `<span id="pocket-value">${numberWithCommas(slot)} 원</span>`
-);
 
 // 입금버튼 클릭시 이벤트
 depositBtn.addEventListener("click", () => {
