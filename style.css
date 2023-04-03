@@ -245,7 +245,7 @@ body {
 /* wallet-container 끝 */
 
 /* get-container 시작 */
-.get-container {
+#get-container {
     grid-area: get;
     background: #fff;
     padding: 25px 27px;
@@ -293,7 +293,7 @@ body {
     height: 5px;
 }
 
-.total-price {
+#total-price {
     margin-top: 11px;
     font-size: 12px;
     font-weight: 500;

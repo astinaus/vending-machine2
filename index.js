@@ -3,12 +3,14 @@ const depositBtn = document.getElementById("deposit-btn");
 const walletMoney = document.getElementById("wallet");
 const pocketMoney = document.getElementById("pocket");
 const rechargeBtn = document.getElementById("recharge");
+const getCont = document.getElementById("get-container");
 
 let wallet = 50000;
 let slot = 0;
 let pocket = 0;
 let recharge = 0;
-let totalPrice = 0;
+let total = 0;
+let count = 0;
 
 // 콜라 이름
 const itemsList = [
@@ -68,7 +70,16 @@ function createProducts() {
         list.appendChild(items);
     });
 }
+// 총금액 작성 함수
+function totalPrice() {
+    const totalValue = document.createElement("h3");
+    totalValue.textContent = `총금액 : ${total} 원`;
+    totalValue.setAttribute("id", "total-price");
+    getCont.appendChild(totalValue);
+}
+
 createProducts();
+totalPrice();
 
 // 1000원 단위로 콤마(,)를 붙여주는 함수
 function numberWithCommas(x) {
