@@ -2,6 +2,8 @@
 
 :root {
     --color-bg: #eae8fe;
+    --color-purple: #6327fe;
+    --color-gray: #bdbdbd;
 }
 
 /* reset */
@@ -9,9 +11,16 @@ body,
 h1,
 h2,
 h3,
-button {
+button,
+ul,
+li {
     margin: 0;
     padding: 0;
+}
+
+ul,
+li {
+    list-style: none;
 }
 
 img {
@@ -32,11 +41,23 @@ body {
     background-color: var(--color-bg);
 }
 
+.a11y-hidden {
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+}
+
 /* button 시작 */
 .item-btn {
     font-size: 9px;
     font-weight: 500;
     border-radius: 5px;
+    color: #333333;
 }
 
 .item-btn.get {
@@ -54,10 +75,30 @@ body {
 .get-count {
     margin-left: auto;
     width: 30px;
-    border: 1px solid #bdbdbd;
+    border: 1px solid var(--color-gray);
     box-sizing: border-box;
     padding: 6.5px;
     border-radius: 5px;
+    color: #000;
+}
+
+.func-btn {
+    font-size: 13px;
+    border-radius: 5px;
+    border: 1px solid var(--color-gray);
+    box-sizing: border-box;
+    font-weight: 500;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s;
+}
+
+.func-btn.purple {
+    color: #fff;
+    background-color: var(--color-purple);
+}
+
+.func-btn:active {
+    transform: translate(2px, 2px);
 }
 
 /* button 끝 */
@@ -84,22 +125,75 @@ body {
 
 .grid-container {
     display: grid;
-    grid-template-areas: "a b" "a c";
+    grid-template-areas: "vending wallet" "vending get";
     gap: 20px 28px;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 50px 1fr;
 }
 /* vending-container 시작 */
 .vending-container {
-    grid-area: a;
+    grid-area: vending;
     background: #fff;
     padding: 31px 27px 28px;
+}
+
+.item-list {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 12px;
+}
+
+.item-list li {
+    flex-grow: 1;
+    flex-shrink: 0;
+}
+
+.item-btn.product {
+    padding: 11px;
+    border: 1px solid var(--color-gray);
+    box-sizing: border-box;
+    border-radius: 15px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+.item-list strong {
+    font-size: 9px;
+}
+
+.price {
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+    background-color: var(--color-purple);
+    padding: 3px 15px;
+    border-radius: 30px;
+}
+
+.menu-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 33px 33px 106px;
+    margin-top: 20px;
+    gap: 11px 12px;
+}
+
+.input-money {
+    border: 1px solid var(--color-gray);
+    box-sizing: border-box;
+    font-size: 13px;
+    padding-left: 6px;
+    border-radius: 5px;
+}
+
+.input-money::placeholder {
+    color: var(--color-gray);
 }
 
 /* vending-container 끝 */
 
 /* wallet-container 시작 */
 .wallet-container {
-    grid-area: b;
+    grid-area: wallet;
     background: #fff;
     padding: 9px 27px;
     box-sizing: border-box;
@@ -118,7 +212,7 @@ body {
 
 /* get-container 시작 */
 .get-container {
-    grid-area: c;
+    grid-area: get;
     background: #fff;
     padding: 25px 27px;
     box-sizing: border-box;
@@ -134,7 +228,7 @@ body {
 
 .get-items {
     background-color: var(--color-bg);
-    border: 1px solid #bdbdbd;
+    border: 1px solid var(--color-gray);
     border-radius: 10px;
     padding: 12px 6px 12px 12px;
     flex-grow: 1;

@@ -17,7 +17,60 @@
     </header>
     <main class="wrapper">
         <div class="grid-container">
-            <section class="vending-container">1</section>
+            <section class="vending-container">
+                <div class="item-container">
+                    <ul class="item-list">
+                        <li>
+                            <button type="button" class="item-btn product">
+                                <img src="./img/original.svg" alt="OriginalCola">
+                                <p><strong>Original_Cola</strong></p>
+                                <span class="price">1000원</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" class="item-btn product">
+                                <img src="./img/original.svg" alt="OriginalCola">
+                                <p><strong>Original_Cola</strong></p>
+                                <span class="price">1000원</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" class="item-btn product">
+                                <img src="./img/original.svg" alt="OriginalCola">
+                                <p><strong>Original_Cola</strong></p>
+                                <span class="price">1000원</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" class="item-btn product">
+                                <img src="./img/original.svg" alt="OriginalCola">
+                                <p><strong>Original_Cola</strong></p>
+                                <span class="price">1000원</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="menu-container">
+                    <div class="wallet">
+                        <span>잔액</span>
+                        <!-- <span>`${itemPrice}원`</span> -->
+                        <!-- JS로 잔액 출력 예정 -->
+                    </div>
+                    <button type="button" class="func-btn">거스름돈 반환</button>
+                    <input type="number" step="1000" id="deposit" class="input-money" placeholder="입금액 입력">
+                    <label for="deposit" class="a11y-hidden">입금할 금액을 입력하세요.</label>
+                    <button type="button" class="func-btn">입금</button>
+                    <div class="get-items">
+                        <!-- button 전체를 JS로 컨트롤할 예정 -->
+                        <button type="button" class="item-btn get">
+                            <img src="./img/original.svg" alt="OriginalCola">
+                            <span>Original_Cola</span>
+                            <span class="get-count">1</span>
+                        </button>
+                    </div>
+                    <button type="button" class="func-btn purple">획득</button>
+                </div>
+            </section>
             <section class="wallet-container">
                 <div class="wallet">
                     <span>소지금</span>
@@ -34,10 +87,9 @@
                         <span>Original_Cola</span>
                         <span class="get-count">1</span>
                     </button>
-                    
                 </div>
-                <h3 class="total-price">총금액 : <span>원</span></p>
-                    <!-- JS로 총금액 출력 예정 -->
+                <h3 class="total-price">총금액 :<span> 원</span></h3>
+                <!-- JS로 총금액 출력 예정 -->
             </section>
         </div>
     </main>
