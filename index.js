@@ -54,7 +54,7 @@ function depositMoney() {
         pocket -= slot;
     } else if (slot < 1000) {
         alert("입금은 1,000원부터 가능합니다!");
-        slot = 0;
+        pocket -= slot;
     } else if (slot >= 1000) {
         let pocketValue = document.getElementById("pocket-value");
         pocketValue.textContent = `${numberWithCommas(pocket)} 원`;
@@ -64,10 +64,14 @@ function depositMoney() {
 
 // 소지금 차감 함수
 function walletDeduction() {
-    wallet -= slot;
     let walletValue = document.getElementById("wallet-value");
-    if (wallet > 0) {
-        walletValue.textContent = `${numberWithCommas(wallet)} 원`;
+    if (wallet > 0 && !(slot < 1000)) {
+        if (slot > wallet) {
+            wallet = wallet;
+        } else {
+            wallet -= slot;
+            walletValue.textContent = `${numberWithCommas(wallet)} 원`;
+        }
     } else if (wallet < 0) {
         wallet += slot;
         walletValue.textContent = `${numberWithCommas(wallet)} 원`;
