@@ -10,6 +10,7 @@ let pocket = 0;
 let recharge = 0;
 let totalPrice = 0;
 
+// 콜라 이름
 const itemsList = [
     "Original_Cola",
     "Violet_Cola",
@@ -19,6 +20,7 @@ const itemsList = [
     "Orange_Cola",
 ];
 
+// 콜라사진
 const productImg = new Map([
     ["Original_Cola", "original.svg"],
     ["Violet_Cola", "violet.svg"],
@@ -28,7 +30,15 @@ const productImg = new Map([
     ["Orange_Cola", "orange.svg"],
 ]);
 
-console.log(productImg.get("Original_Cola"));
+// 콜라재고
+const productStock = new Map([
+    ["Original_Cola", 20],
+    ["Violet_Cola", 0],
+    ["Yellow_Cola", 15],
+    ["Cool_Cola", 20],
+    ["Green_Cola", 10],
+    ["Orange_Cola", 10],
+]);
 
 // 콜라 버튼 리스트 생성 함수
 function createProducts() {
@@ -48,6 +58,12 @@ function createProducts() {
         itemBtn.appendChild(itemImg);
         itemBtn.appendChild(itemName);
         itemBtn.appendChild(itemPrice);
+        if (productStock.get(item) === 0) {
+            const soldOut = document.createElement("span");
+            soldOut.setAttribute("class", "sold-out");
+            soldOut.setAttribute("disabled", "");
+            itemBtn.appendChild(soldOut);
+        }
         items.appendChild(itemBtn);
         list.appendChild(items);
     });
