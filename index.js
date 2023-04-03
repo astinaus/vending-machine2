@@ -61,7 +61,7 @@ function createProducts() {
         if (productStock.get(item) === 0) {
             const soldOut = document.createElement("span");
             soldOut.setAttribute("class", "sold-out");
-            soldOut.setAttribute("disabled", "");
+            itemBtn.setAttribute("disabled", "");
             itemBtn.appendChild(soldOut);
         }
         items.appendChild(itemBtn);
