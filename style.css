@@ -137,13 +137,13 @@ body {
     padding: 31px 27px 28px;
 }
 
-.item-list {
+#item-list {
     display: flex;
     flex-flow: row wrap;
     gap: 12px;
 }
 
-.item-list li {
+#item-list li {
     flex-grow: 1;
     flex-shrink: 0;
 }
@@ -190,7 +190,7 @@ body {
     box-sizing: border-box;
 }
 
-.item-list strong {
+#item-list p {
     font-size: 9px;
 }
 

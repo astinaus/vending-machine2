@@ -10,21 +10,63 @@ let pocket = 0;
 let recharge = 0;
 let totalPrice = 0;
 
+const itemsList = [
+    "Original_Cola",
+    "Violet_Cola",
+    "Yellow_Cola",
+    "Cool_Cola",
+    "Green_Cola",
+    "Orange_Cola",
+];
+
+const productImg = new Map([
+    ["Original_Cola", "original.svg"],
+    ["Violet_Cola", "violet.svg"],
+    ["Yellow_Cola", "yellow.svg"],
+    ["Cool_Cola", "cool.svg"],
+    ["Green_Cola", "green.svg"],
+    ["Orange_Cola", "orange.svg"],
+]);
+
+console.log(productImg.get("Original_Cola"));
+
+// 콜라 버튼 리스트 생성 함수
+function createProducts() {
+    const list = document.getElementById("item-list");
+
+    itemsList.forEach((item) => {
+        const items = document.createElement("li");
+        const itemBtn = document.createElement("button");
+        const itemImg = document.createElement("img");
+        const itemName = document.createElement("p");
+        const itemPrice = document.createElement("span");
+        itemName.textContent = item;
+        itemPrice.textContent = 1000 + "원";
+        itemImg.setAttribute("src", "./img/" + productImg.get(item));
+        itemPrice.setAttribute("class", "price");
+        itemBtn.setAttribute("class", "item-btn product");
+        itemBtn.appendChild(itemImg);
+        itemBtn.appendChild(itemName);
+        itemBtn.appendChild(itemPrice);
+        items.appendChild(itemBtn);
+        list.appendChild(items);
+    });
+}
+createProducts();
+
 // 1000원 단위로 콤마(,)를 붙여주는 함수
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-window.onload = function () {
-    walletMoney.insertAdjacentHTML(
-        "beforeend",
-        `<span id="wallet-value">${numberWithCommas(wallet)} 원</span>`
-    );
-    pocketMoney.insertAdjacentHTML(
-        "beforeend",
-        `<span id="pocket-value">${numberWithCommas(slot)} 원</span>`
-    );
-};
+walletMoney.insertAdjacentHTML(
+    "beforeend",
+    `<span id="wallet-value">${numberWithCommas(wallet)} 원</span>`
+);
+pocketMoney.insertAdjacentHTML(
+    "beforeend",
+    `<span id="pocket-value">${numberWithCommas(slot)} 원</span>`
+);
 
 // 입금버튼 클릭시 이벤트
 depositBtn.addEventListener("click", () => {
