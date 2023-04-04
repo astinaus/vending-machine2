@@ -303,3 +303,37 @@ body {
     font-weight: 500;
     align-self: flex-end;
 }
+
+@media (max-width: 768px) {
+    .grid-container {
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+    }
+}
+
+@media (max-width: 680px) {
+    body {
+        background-color: #fff;
+    }
+
+    .header-logo img {
+        width: 166px;
+    }
+
+    .wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 18px;
+    }
+    .grid-container {
+        display: grid;
+        grid-template-areas:
+            "vending"
+            "wallet"
+            "get";
+        grid-template-rows: 1fr 50px 1fr;
+        grid-template-columns: 1fr;
+        width: 360px;
+    }
+}
