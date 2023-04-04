@@ -42,6 +42,26 @@ const productStock = new Map([
     ["Orange_Cola", 10],
 ]);
 
+// 고른 콜라 개수
+const productCount = new Map([
+    ["Original_Cola", 0],
+    ["Violet_Cola", 0],
+    ["Yellow_Cola", 0],
+    ["Cool_Cola", 0],
+    ["Green_Cola", 0],
+    ["Orange_Cola", 0],
+]);
+
+// 획득한 콜라 개수
+const productGetCount = new Map([
+    ["Original_Cola", 0],
+    ["Violet_Cola", 0],
+    ["Yellow_Cola", 0],
+    ["Cool_Cola", 0],
+    ["Green_Cola", 0],
+    ["Orange_Cola", 0],
+]);
+
 // 소지금, 잔액 초기값 작성
 walletMoney.insertAdjacentHTML(
     "beforeend",
@@ -65,8 +85,12 @@ function createProducts() {
         itemName.textContent = item;
         itemPrice.textContent = 1000 + "원";
         itemImg.setAttribute("src", "./img/" + productImg.get(item));
+        itemImg.setAttribute("alt", `${item.replace("_", " ")}`);
         itemPrice.setAttribute("class", "price");
         itemBtn.setAttribute("class", "item-btn product");
+        itemBtn.setAttribute("id", `${item}`);
+        itemBtn.setAttribute("type", "button");
+        itemBtn.setAttribute("onclick", `shoppingProduct("${item}");`);
         itemBtn.appendChild(itemImg);
         itemBtn.appendChild(itemName);
         itemBtn.appendChild(itemPrice);
@@ -80,12 +104,48 @@ function createProducts() {
         list.appendChild(items);
     });
 }
+
+// 획득 버튼 클릭시 쇼핑카트의 콜라 구매
+// 획득한 음료 창으로 넘어감.
+
 // 총금액 작성 함수
 function totalPrice() {
     const totalValue = document.createElement("h3");
     totalValue.textContent = `총금액 : ${total} 원`;
     totalValue.setAttribute("id", "total-price");
     getCont.appendChild(totalValue);
+}
+
+// 콜라 버튼 클릭시 리스트에 추가하는 함수
+function shoppingProduct(item) {
+    const bucket = document.getElementById("shopping-bucket");
+
+    if (productCount.get(item) === 0) {
+        productCount.set(item, 1);
+
+        const itemBtn = document.createElement("button");
+        const itemImg = document.createElement("img");
+        const itemName = document.createElement("span");
+        const itemCount = document.createElement("span");
+
+        itemImg.setAttribute("src", "./img/" + productImg.get(item));
+        itemImg.setAttribute("alt", `${item.replace("_", " ")}`);
+        itemName.textContent = item;
+        itemCount.textContent = productCount.get(item);
+        itemCount.setAttribute("class", "get-count");
+        itemBtn.setAttribute("type", "button");
+        itemBtn.setAttribute("class", "item-btn get");
+        itemBtn.setAttribute("id", `"${item}_bucket"`);
+        itemBtn.appendChild(itemImg);
+        itemBtn.appendChild(itemName);
+        itemBtn.appendChild(itemCount);
+        bucket.appendChild(itemBtn);
+    } else if (productCount.get(item) !== 0) {
+        productCount.set(item, productCount.get(item) + 1);
+        const itemBtn = document.getElementById(`"${item}_bucket"`);
+        const itemCount = itemBtn.lastChild;
+        itemCount.textContent = productCount.get(item);
+    }
 }
 
 createProducts();
