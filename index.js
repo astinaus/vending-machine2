@@ -232,6 +232,7 @@ function returnProduct(item) {
     const itemStock = document.getElementById(`${item}`);
     productCount.set(item, productCount.get(item) - 1);
     productStock.set(item, productStock.get(item) + 1);
+    price = price - 1000;
     if (productCount.get(item) !== 0) {
         itemBtn.lastChild.textContent = productCount.get(item);
     } else if (productCount.get(item) === 0) {
