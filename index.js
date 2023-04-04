@@ -11,6 +11,7 @@ let pocket = 0;
 let recharge = 0;
 let total = 0;
 let count = 0;
+let price = 0;
 
 // 콜라 이름
 const itemsList = [
@@ -105,46 +106,140 @@ function createProducts() {
     });
 }
 
-// 획득 버튼 클릭시 쇼핑카트의 콜라 구매
-// 획득한 음료 창으로 넘어감.
-
 // 총금액 작성 함수
 function totalPrice() {
-    const totalValue = document.createElement("h3");
-    totalValue.textContent = `총금액 : ${total} 원`;
-    totalValue.setAttribute("id", "total-price");
-    getCont.appendChild(totalValue);
+    itemsList.forEach((item) => {
+        total = total + productGetCount.get(item) * 1000;
+    });
+    const totalValue = document.getElementById("total-price");
+    totalValue.textContent = `총 금액 : ${numberWithCommas(total)} 원`;
+    total = 0;
 }
 
 // 콜라 버튼 클릭시 리스트에 추가하는 함수
 function shoppingProduct(item) {
     const bucket = document.getElementById("shopping-bucket");
+    if (productStock.get(item) !== 0) {
+        if (productCount.get(item) === 0) {
+            productCount.set(item, 1);
 
-    if (productCount.get(item) === 0) {
-        productCount.set(item, 1);
+            const itemBtn = document.createElement("button");
+            const itemImg = document.createElement("img");
+            const itemName = document.createElement("span");
+            const itemCount = document.createElement("span");
 
-        const itemBtn = document.createElement("button");
-        const itemImg = document.createElement("img");
-        const itemName = document.createElement("span");
-        const itemCount = document.createElement("span");
+            itemImg.setAttribute("src", "./img/" + productImg.get(item));
+            itemImg.setAttribute("alt", `${item.replace("_", " ")}`);
+            itemName.textContent = item;
+            itemCount.textContent = productCount.get(item);
+            itemCount.setAttribute("class", "get-count");
+            itemBtn.setAttribute("type", "button");
+            itemBtn.setAttribute("class", "item-btn get");
+            itemBtn.setAttribute("id", `"${item}_bucket"`);
+            itemBtn.setAttribute("onclick", `returnProduct("${item}");`);
+            itemBtn.appendChild(itemImg);
+            itemBtn.appendChild(itemName);
+            itemBtn.appendChild(itemCount);
+            bucket.appendChild(itemBtn);
+        } else if (productCount.get(item) !== 0) {
+            productCount.set(item, productCount.get(item) + 1);
+            const itemBtn = document.getElementById(`"${item}_bucket"`);
+            const itemCount = itemBtn.lastChild;
+            itemCount.textContent = productCount.get(item);
+        }
+        price = price + 1000;
+        productStock.set(item, productStock.get(item) - 1);
+    } else if (productStock.get(item) === 0) {
+        // 재고 없으면 품절버튼으로 바뀜.
+        alert("재고가 없습니다!");
+        const itemBtn = document.getElementById(item);
+        itemBtn.setAttribute("disabled", "");
+        itemBtn.insertAdjacentHTML(
+            "beforeend",
+            '<span class="sold-out"></span>'
+        );
+    }
+}
 
-        itemImg.setAttribute("src", "./img/" + productImg.get(item));
-        itemImg.setAttribute("alt", `${item.replace("_", " ")}`);
-        itemName.textContent = item;
-        itemCount.textContent = productCount.get(item);
-        itemCount.setAttribute("class", "get-count");
-        itemBtn.setAttribute("type", "button");
-        itemBtn.setAttribute("class", "item-btn get");
-        itemBtn.setAttribute("id", `"${item}_bucket"`);
-        itemBtn.appendChild(itemImg);
-        itemBtn.appendChild(itemName);
-        itemBtn.appendChild(itemCount);
-        bucket.appendChild(itemBtn);
-    } else if (productCount.get(item) !== 0) {
-        productCount.set(item, productCount.get(item) + 1);
-        const itemBtn = document.getElementById(`"${item}_bucket"`);
-        const itemCount = itemBtn.lastChild;
-        itemCount.textContent = productCount.get(item);
+// 획득 버튼 클릭시 쇼핑카트의 콜라 구매
+// 획득한 음료 창으로 넘어감.
+function getProduct() {
+    const bucket = document.getElementById("shopping-bucket");
+    if (bucket.children.length === 0) {
+        // 장바구니가 비어있음을 알림
+        alert("콜라를 선택해주세요!");
+    } else if (bucket.children.length !== 0) {
+        if (pocket === 0 || pocket - price < 0) {
+            // 잔액이 없으면 구매가 안됨
+            alert("잔액이 부족합니다!");
+        } else if (pocket !== 0) {
+            // 구매하면 bucket을 비워야함
+            bucket.textContent = "";
+
+            // 획득한 음료 박스에 음료가 추가됨.
+            const getBox = document.getElementById("get-box");
+            itemsList.forEach((item) => {
+                if (
+                    productCount.get(item) !== 0 &&
+                    productGetCount.get(item) === 0
+                ) {
+                    const itemBtn = document.createElement("button");
+                    const itemImg = document.createElement("img");
+                    const itemName = document.createElement("span");
+                    const itemCount = document.createElement("span");
+                    itemImg.setAttribute(
+                        "src",
+                        "./img/" + productImg.get(item)
+                    );
+                    itemImg.setAttribute("alt", `${item.replace("_", " ")}`);
+                    itemName.textContent = item;
+                    itemCount.textContent = productCount.get(item);
+                    itemCount.setAttribute("class", "get-count");
+                    itemBtn.setAttribute("type", "button");
+                    itemBtn.setAttribute("class", "item-btn get");
+                    itemBtn.setAttribute("id", `"${item}_get"`);
+                    itemBtn.appendChild(itemImg);
+                    itemBtn.appendChild(itemName);
+                    itemBtn.appendChild(itemCount);
+                    getBox.appendChild(itemBtn);
+                    productGetCount.set(item, productCount.get(item));
+                    productCount.set(item, 0);
+                } else if (productGetCount.get(item) !== 0) {
+                    productGetCount.set(
+                        item,
+                        productGetCount.get(item) + productCount.get(item)
+                    );
+                    productCount.set(item, 0);
+                    console.log(productGetCount.get(item));
+                    const itemBtn = document.getElementById(`"${item}_get"`);
+                    console.log(itemBtn.lastChild);
+                    itemBtn.lastChild.textContent = productGetCount.get(item);
+                }
+            });
+            alert("콜라가 구매되었습니다!");
+            pocket = pocket - price;
+            price = 0;
+            const pocketValue = document.getElementById("pocket-value");
+            pocketValue.textContent = `${numberWithCommas(pocket)} 원`;
+            totalPrice();
+        }
+    }
+}
+
+// 목록에 있는 콜라를 누르면 갯수를 빼는 함수
+function returnProduct(item) {
+    const itemBtn = document.getElementById(`"${item}_bucket"`);
+    const itemStock = document.getElementById(`${item}`);
+    productCount.set(item, productCount.get(item) - 1);
+    productStock.set(item, productStock.get(item) + 1);
+    if (productCount.get(item) !== 0) {
+        itemBtn.lastChild.textContent = productCount.get(item);
+    } else if (productCount.get(item) === 0) {
+        itemBtn.remove();
+    }
+    if (productStock.get(item) === 1) {
+        itemStock.removeChild(itemStock.lastChild);
+        itemStock.removeAttribute("disabled");
     }
 }
 
@@ -216,9 +311,9 @@ function rechargeMoney() {
         recharge += pocket;
         pocket -= recharge;
         wallet += recharge;
-        let pocketValue = document.getElementById("pocket-value");
+        const pocketValue = document.getElementById("pocket-value");
         pocketValue.textContent = `${numberWithCommas(pocket)} 원`;
-        let walletValue = document.getElementById("wallet-value");
+        const walletValue = document.getElementById("wallet-value");
         walletValue.textContent = `${numberWithCommas(wallet)} 원`;
         alert("거스름돈이 반환되었습니다!");
         recharge = 0;

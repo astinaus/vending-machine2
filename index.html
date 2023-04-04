@@ -33,15 +33,10 @@
                     <input type="number" step="1000" id="deposit" class="input-money" placeholder="입금액 입력">
                     <label for="deposit" class="a11y-hidden">입금할 금액을 입력하세요.</label>
                     <button type="button" class="func-btn" id="deposit-btn">입금</button>
-                    <div class="get-items">
+                    <div class="get-items" id="shopping-bucket">
                         <!-- button 전체를 JS로 컨트롤할 예정 -->
-                        <!-- <button type="button" class="item-btn get">
-                            <img src="./img/original.svg" alt="OriginalCola">
-                            <span>Original_Cola</span>
-                            <span class="get-count">1</span>
-                        </button> -->
                     </div>
-                    <button type="button" class="func-btn purple">획득</button>
+                    <button type="button" class="func-btn purple" onclick="getProduct();">획득</button>
                 </div>
             </section>
             <section class="wallet-container">
@@ -53,7 +48,7 @@
             </section>
             <section id="get-container">
                 <h2 class="get-lists">획득한 음료</h2>
-                <div class="get-items">
+                <div class="get-items" id="get-box">
                     <!-- button 전체를 JS로 컨트롤할 예정 -->
                     <!-- <button type="button" class="item-btn get">
                         <img src="./img/original.svg" alt="OriginalCola">
@@ -61,8 +56,8 @@
                         <span class="get-count">1</span>
                     </button> -->
                 </div>
-                <!-- <h3 id="total-price">총금액 : 9,000 원</h3> -->
-                <!-- JS로 총금액 출력 예정 -->
+                <h3 id="total-price">총 금액 : 0 원</h3>
+                <!-- 금액은 JS로 출력 -->
             </section>
         </div>
     </main>
