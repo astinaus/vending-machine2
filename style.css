@@ -101,6 +101,10 @@ body {
     transform: translate(2px, 2px);
 }
 
+.item-btn[id$="_get"] {
+    cursor: default;
+}
+
 /* button 끝 */
 
 /* header 로고 */

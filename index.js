@@ -197,7 +197,7 @@ function getProduct() {
                     itemCount.setAttribute("class", "get-count");
                     itemBtn.setAttribute("type", "button");
                     itemBtn.setAttribute("class", "item-btn get");
-                    itemBtn.setAttribute("id", `"${item}_get"`);
+                    itemBtn.setAttribute("id", `${item}_get`);
                     itemBtn.appendChild(itemImg);
                     itemBtn.appendChild(itemName);
                     itemBtn.appendChild(itemCount);
@@ -211,7 +211,7 @@ function getProduct() {
                     );
                     productCount.set(item, 0);
                     console.log(productGetCount.get(item));
-                    const itemBtn = document.getElementById(`"${item}_get"`);
+                    const itemBtn = document.getElementById(`${item}_get`);
                     console.log(itemBtn.lastChild);
                     itemBtn.lastChild.textContent = productGetCount.get(item);
                 }
