@@ -209,7 +209,7 @@ body {
 
 .menu-container {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 200px 94px;
     grid-template-rows: 33px 33px 106px;
     margin-top: 20px;
     gap: 11px 12px;
