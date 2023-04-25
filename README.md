@@ -1,5 +1,5 @@
 # Vending Machine (Cola Cola)
-
+## https://astinaus.github.io/vending-machine2
 -   소지금이 5만원 주어집니다.
 -   입금액에 숫자를 입력후 입금을 누르면 자판기에 돈이 입금됩니다.(최소금액 1,000원)
 -   거스름돈 반환 버튼을 누르면 잔액이 소지금으로 반환됩니다.
@@ -11,4 +11,4 @@
 ![image](https://user-images.githubusercontent.com/116331221/234252264-69a3eeac-f3b5-4149-b9bf-b3a01d0740a5.png)
 
 
-## https://astinaus.github.io/vending-machine2
+
