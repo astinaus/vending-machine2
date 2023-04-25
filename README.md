@@ -8,5 +8,6 @@
 -   박스에 담긴 콜라를 다시 누르면 재고가 반환됩니다.
 -   각 콜라는 재고가 정해져 있으며, 재고가 떨어지면 품절을 표시합니다.
 -   반응형이 구현되어 있습니다.
+![thumbnail.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/069ec655-371c-4549-a01b-b31e79b3bc24/thumbnail.png)
 
 ## https://astinaus.github.io/vending-machine2
